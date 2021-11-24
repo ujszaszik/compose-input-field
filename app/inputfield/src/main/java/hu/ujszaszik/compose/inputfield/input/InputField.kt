@@ -26,14 +26,12 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import hu.ujszaszik.compose.inputfield.extension.empty
 import hu.ujszaszik.compose.inputfield.extension.isNotNull
 import hu.ujszaszik.compose.inputfield.focus.FocusEvent
 import hu.ujszaszik.compose.inputfield.keyboard.KeyboardStyle
 import hu.ujszaszik.compose.inputfield.layout.CenteredColumn
-import hu.ujszaszik.compose.inputfield.resources.Colors
 import hu.ujszaszik.compose.inputfield.resources.Dimens
 
 @Composable
@@ -51,6 +49,13 @@ fun InputField(
     errorTextValue: String? = null
 ) {
     var text by remember { mutableStateOf(String.empty) }
+    var validatedText by remember { mutableStateOf(String.empty) }
+
+    if (validator.invoke(text)) {
+        if ((maxLength != null && text.length <= maxLength) || maxLength == null) {
+            validatedText = text.also { onTextChange.invoke(validatedText) }
+        }
+    }
 
     val stateMachine by remember { mutableStateOf(stateMachine(style)) }
     if (isDisabled) stateMachine.transition(InputFieldEvent.Disable)
@@ -82,15 +87,15 @@ fun InputField(
 
     val textColorAnimation: Color by animateColorAsState(stateMachine.state.labelTextColor)
 
-    CenteredColumn(modifier = Modifier.height(80.dp)) {
+    CenteredColumn(modifier = Modifier.height(style.height)) {
         Box(
             modifier =
             Modifier
                 .fillMaxWidth()
-                .height(Dimens.inputFieldLayoutHeight)
+                .height(style.layoutHeight)
         ) {
             Surface(
-                elevation = Dimens.inputFieldElevation,
+                elevation = style.elevation,
                 shape = RoundedCornerShape(style.cornerRadius),
                 modifier = Modifier
                     .border(
@@ -123,16 +128,10 @@ fun InputField(
                             }
                             .pointerInput(Unit) { detectTapGestures { focusRequester.requestFocus() } },
                         enabled = !isDisabled,
-                        value = text,
-                        onValueChange = { value ->
-                            if (validator.invoke(value)) {
-                                if ((maxLength != null && value.length <= maxLength) || maxLength == null) {
-                                    text = value.also { onTextChange.invoke(value) }
-                                }
-                            }
-                        },
+                        value = validatedText,
+                        onValueChange = { text = it },
                         textStyle = TextStyle(
-                            color = Colors.fontPrimary,
+                            color = style.inputTextColor,
                             fontFamily = style.inputTextFontId,
                             fontSize = style.inputTextSize
                         ),

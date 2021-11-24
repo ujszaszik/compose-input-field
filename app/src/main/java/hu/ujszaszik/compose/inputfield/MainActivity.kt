@@ -1,14 +1,33 @@
 package hu.ujszaszik.compose.inputfield
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import hu.ujszaszik.compose.inputfield.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import hu.ujszaszik.compose.inputfield.ui.theme.ComposeInputFieldTheme
 
-class MainActivity : AppCompatActivity() {}
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ComposeInputFieldTheme {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    color = MaterialTheme.colors.background
+                ) {
+                    Column {
+                        TestNumericInputField()
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TestCreditCardInputField()
+                    }
+                }
+            }
+        }
+    }
+}

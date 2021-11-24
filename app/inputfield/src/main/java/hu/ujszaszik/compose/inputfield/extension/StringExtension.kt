@@ -8,10 +8,15 @@ val String.Companion.empty: String
 val String.Companion.space: String
     get() = " "
 
+val String.Companion.dash: String
+    get() = "-"
+
 val String?.isNotNull: Boolean
     get() = this != null
 
 fun String?.removeWhitespaces() = this?.replace(String.space, String.empty)
+
+fun String?.removeDashes() = this?.replace(String.dash, String.empty)
 
 fun String?.isNumeric(): Boolean = !isNullOrEmpty() && hasOnlyDigits()
 

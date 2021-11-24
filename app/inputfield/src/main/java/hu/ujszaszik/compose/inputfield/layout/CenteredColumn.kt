@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CenteredColumn(modifier: Modifier, composable: @Composable () -> Unit) {
+fun CenteredColumn(modifier: Modifier = Modifier, composable: @Composable () -> Unit) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,

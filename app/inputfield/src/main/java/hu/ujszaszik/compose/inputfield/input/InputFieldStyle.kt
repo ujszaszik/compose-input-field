@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.sp
 import hu.ujszaszik.compose.inputfield.resources.Colors
 
 open class InputFieldStyle {
+    open val height = 80.dp
     open val boxHeight = 50.dp
     open val layoutHeight = 57.dp
     open val textAreaHeight = 40.dp
