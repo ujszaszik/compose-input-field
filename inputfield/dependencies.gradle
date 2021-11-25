@@ -22,9 +22,4 @@ ext {
             materialDesignIconsExt: "androidx.compose.material:material-icons-extended:$version_compose",
             toolingSupport        : "androidx.compose.ui:ui-tooling:$version_compose"
     ]
-
-    customLibs = [
-            stateMachine: "'com.tinder.statemachine:statemachine:$version_state_machine"
-    ]
-
 }

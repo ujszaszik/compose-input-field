@@ -4,7 +4,7 @@ ext {
     version_gradle = '7.0.2'
 
     // KOTLIN
-    version_kotlin = '1.6.0'
+    version_kotlin = '1.5.31'
     version_coroutines = '1.5.2'
     version_kotlin_metadata = "0.3.0"
 

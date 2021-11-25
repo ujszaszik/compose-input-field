@@ -45,5 +45,5 @@ android {
 dependencies {
     implementation androidCoreLibs.values()
     implementation composeLibs.values()
-    implementation customLibs.values()
+    implementation "com.tinder.statemachine:statemachine:$version_state_machine"
 }
