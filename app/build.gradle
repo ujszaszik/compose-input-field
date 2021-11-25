@@ -3,8 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: 'inputfield/versions.gradle'
-apply from: 'inputfield/dependencies.gradle'
+apply from: '../versions.gradle'
+apply from: '../dependencies.gradle'
 
 android {
     compileSdk 31
@@ -51,18 +51,8 @@ android {
 }
 
 dependencies {
-    implementation project(':app:inputfield')
+    implementation project(':inputfield')
 
     implementation androidCoreLibs.values()
     implementation composeLibs.values()
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 }
